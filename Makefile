@@ -8,4 +8,4 @@ BINDIR = bin
 PROGRAM = nnets
 
 $(PROGRAM): $(SRCDIR)/$(PROGRAM).cpp
-			$(CC) $(CFLAGS) -o $(BINDIR)/$(PROGRAM) $(SRCDIR)/*.cpp \
+			$(CC) $(CFLAGS) -o $(BINDIR)/$(PROGRAM) $(SRCDIR)/*.cpp $(SRCDIR)/**/*.cpp \
