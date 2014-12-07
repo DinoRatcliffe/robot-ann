@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <stdlib.h>
+#include <iostream>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ class Neuron {
         double sigmoid(double x) { return x / (1 + abs(x)); };
         double getErrorDelta() { return m_errordelta; }
     private:
+        friend ostream& operator<<(std::ostream &strm, const Neuron &neuron);
         int m_NumberInputs;
         vector<double> m_vectorWeights;
         static double randomWeight();

@@ -15,6 +15,7 @@ double Neuron::update(vector<double> &inputs) {
     for(int i = 0; i < inputs.size(); i++) {
         sum += inputs[i] * m_vectorWeights[i];
     }
+    sum += m_vectorWeights[m_vectorWeights.size()-1];
     m_previousInputs = inputs;
     m_previousOutput = sigmoid(sum);
     return m_previousOutput;
@@ -50,4 +51,11 @@ void Neuron::backpropogate(double learnrate, double momentum, double errorDelta)
 
         m_vectorWeightDeltas.push_back(weightdelta);
     }
+}
+
+ostream& operator<<(ostream &strm, const Neuron &neuron) {
+    for (int i = 0; i < neuron.m_vectorWeights.size(); i++) {
+        strm << neuron.m_vectorWeights[i] << " ";
+    }
+    return strm;
 }

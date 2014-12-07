@@ -7,6 +7,10 @@ Layer::Layer(int NumberNeurons, int NumberInputsPerNeuron) : m_NumberNeurons(Num
     }
 }
 
+Layer::Layer(string layerParams) {
+    cout << "layerparams" << endl;
+}
+
 vector<double> Layer::update(vector<double> &inputs) {
     vector<double> output;
     for (int i = m_NumberNeurons-1; i >= 0; i--) {
@@ -31,4 +35,11 @@ Layer& Layer::backpropogate(double learnrate, double momentum, vector<double> &t
         m_neurons[i].backpropogate(learnrate, momentum, m_neurons[i].error(targetOuput[i]));
     }
     return *this;
+}
+
+ostream& operator<<(ostream &strm, const Layer &layer) {
+    for(int i = 0; i < layer.m_NumberNeurons; i++) { 
+        strm << layer.m_neurons[i] << endl;
+    }
+    return strm;
 }
