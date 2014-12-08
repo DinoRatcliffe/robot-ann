@@ -21,12 +21,14 @@ Network::Network(string netParams) {
    iss >> m_NumberInputs;
    iss >> m_NumberOutputs;
    iss >> m_NumberHiddenLayers; 
+   iss >> m_NeuronsPerHiddenLayer;
 
    string s;
-   getline(iss, &s);
+   getline(iss, s);
+   getline(iss, s);
    m_layers.push_back(Layer(s));
    for (int i = 0; i < m_NumberHiddenLayers; i++) {
-       getline(iss, &s);
+       getline(iss, s);
        Layer l = Layer(s);
        m_layers.push_back(l);
    }
@@ -53,9 +55,10 @@ ostream& operator<<(std::ostream &strm, const Network &net) {
          << net.m_seed << endl
          << net.m_NumberInputs << endl
          << net.m_NumberOutputs << endl
-         << net.m_NumberHiddenLayers << endl;
-    for (int i = m_layers.size() - 1; i >= 0; i--) {
-        strm << net.m_layers[i];
+         << net.m_NumberHiddenLayers << endl
+         << net.m_NeuronsPerHiddenLayer << endl;
+    for (int i = 0; i < net.m_layers.size(); i++) {
+        strm << net.m_layers[i] << endl;
     }
     return strm;
 };

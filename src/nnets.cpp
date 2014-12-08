@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "neuralnet/Neuron.h"
 #include "neuralnet/Network.h"
 
@@ -77,13 +78,26 @@ int main()
         }
     }
     cout << "=================================" << endl;
+
+    cout << "input: " << inputs[4][0] << ", " << inputs[4][1] << endl;
+    output = net.update(inputs[4]);
+    for (int j = 0; j < output.size(); j++) {
+        cout << j+1 << ": " << output[j] << endl;
+    }
+
+    ostringstream encodedNetStream;
+    encodedNetStream << net << endl;
+    string encodedNet = encodedNetStream.str();
+
+    Network loadedNet(encodedNet);
     cout << net << endl;
+    cout << loadedNet << endl;
     
-        cout << "input: " << inputs[4][0] << ", " << inputs[4][1] << endl;
-        output = net.update(inputs[4]);
-        for (int j = 0; j < output.size(); j++) {
-            cout << j+1 << ": " << output[j] << endl;
-        }
+    cout << "input: " << inputs[4][0] << ", " << inputs[4][1] << endl;
+    output = loadedNet.update(inputs[4]);
+    for (int j = 0; j < output.size(); j++) {
+        cout << j+1 << ": " << output[j] << endl;
+    }
 
     return 0;
 }

@@ -10,6 +10,7 @@ using namespace std;
 class Neuron {
     public:
         Neuron(int NumberInputs);
+        Neuron(int NumberInputs, vector<double> weights);
         int getNumberInputs() { return m_NumberInputs; };
         vector<double> getVectorWeights() { return m_vectorWeights; };
         void setVectorWeights(vector<double> newVectorWeights) { m_vectorWeights = newVectorWeights; };

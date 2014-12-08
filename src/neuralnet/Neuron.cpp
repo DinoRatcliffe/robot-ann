@@ -10,6 +10,12 @@ Neuron::Neuron(int NumberInputs) : m_NumberInputs(NumberInputs) {
     }
 }
 
+Neuron::Neuron(int NumberInputs, vector<double> weights) : m_NumberInputs(NumberInputs), m_vectorWeights(weights) {
+    for (int i = 0; i < NumberInputs + 1; i++) {
+        m_vectorWeightDeltas.push_back(0);
+    }
+}
+
 double Neuron::update(vector<double> &inputs) {
     double sum = 0.0;
     for(int i = 0; i < inputs.size(); i++) {
@@ -45,15 +51,14 @@ void Neuron::backpropogate(double learnrate, double momentum, double errorDelta)
     for (int i = m_vectorWeights.size()-1; i >= 0; i--) {
         double weightdelta = -learnrate * errorDelta * m_previousInputs[i]; //TODO actually fix
 
-//        cout << "old: " << m_vectorWeights[i];
         m_vectorWeights[i] = m_vectorWeights[i] + weightdelta + (momentum * m_vectorWeightDeltasMinus[i]);
-//        cout << " new: " << m_vectorWeights[i] << endl;
 
         m_vectorWeightDeltas.push_back(weightdelta);
     }
 }
 
 ostream& operator<<(ostream &strm, const Neuron &neuron) {
+    strm << neuron.m_vectorWeights.size() << " ";
     for (int i = 0; i < neuron.m_vectorWeights.size(); i++) {
         strm << neuron.m_vectorWeights[i] << " ";
     }
