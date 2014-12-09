@@ -4,12 +4,15 @@
 #include <vector>
 #include "Layer.h"
 #include <time.h>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
 class Network {
     public:
        Network(int NumberInputs, int NumberOutputs, int NumberHiddenLayers, int NeuronsPerHiddenLayer, int seed = time(NULL));
+       Network(string netParams);
        vector<double> getWeights() const;
        int getNumberOfWeights() const;
        double momentum, learning_rate;
@@ -21,6 +24,7 @@ class Network {
        int getT() { return m_t; };
        void backpropogate(vector<double> &target_output);
     private:
+       friend ostream& operator<<(std::ostream &strm, const Network &net);
        int m_NumberInputs;
        int m_NumberOutputs;
        int m_NumberHiddenLayers;
